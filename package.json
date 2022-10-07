@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "git": "git add --all && git commit -m\"Deploy\" && git push origin master && echo \"Deployed\" "
+    "git": "git add --all && git commit -m\"Deploy\" && git push origin main && echo \"Deployed\" "
   },
   "dependencies": {
     "next": "12.3.1",
