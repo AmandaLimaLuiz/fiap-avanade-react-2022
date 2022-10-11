@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 //import styles from '../../styles/Header.module.css';
 import {css} from '@emotion/css';
 import styled from '@emotion/styled';
+import Input from '../Form/Input/Input';
+import Button from '../Form/Button/Button';
 
 const HeaderPage = styled.header`background-color: #e1e1e1;
   width: 100%;
@@ -12,37 +14,28 @@ const HeaderPage = styled.header`background-color: #e1e1e1;
   padding: 0 10%;
   color: black;
 `;
-const Input = styled.input`
-width: 190px;
-padding: .375rem .75rem;
-font-size: 1rem;
-font-weight: 400;
-line-height: 1.5;
-color: #212529;
-background-color: #fff;
-background-clip: padding-box;
-border: 1px solid #ced4da;
-appearance: none;
-border-radius: .900rem;`;
 
-const Button = styled.button`
-width: 100px;
-line-height: 30px;
-border: none;
-border-radius: .900rem;
-margin-left: 10px;
-&:hover{
-  cursor:pointer;
-  background-color: #fff;
-  color: black;
-  border: 1px solid #ced4da;
-}
-`;
+
+
+// Type não tem extends
 type HeaderProps = {
   menu?: Array<string>;
   pesquisar?: string;
+  name?: string;
 }
+/* type UserType = {
+  email: string;
+  password: string;
+}
+//Type permite juntar, Interface não.
+type User = HeaderProps | UserType
 
+// Interface tem extends
+interface IHeaderProps{
+  menu?: Array<string>;
+  pesquisar?: string;
+  name?: string;
+} */
 
 //CSS
 // 5 maneiras diferentes de utilizar css.
@@ -52,7 +45,12 @@ type HeaderProps = {
 // 4° Utilizando estilização direto no component - Utilizando o CSS-in-JS
 // 5° Utilizando uma biblioteca de estilização - Ex.: Material-UI - 4 usa styled componentes - 5 usa Emotion CSS
 export default function Header(props:HeaderProps) {
+
+  const [userAuth, setUserAuth] = useState<boolean>(true)
+  const [nameUser, setNameUser] = useState<string | undefined>(props.name);
+
   return (
+
     //Utilizando Css modules
     //<header className={styles['menu-site']}>
     <HeaderPage>
@@ -75,6 +73,9 @@ export default function Header(props:HeaderProps) {
               <li>Contato</li>
             </ul>
         </nav>
+        {userAuth && (<div>
+          <span>Seja bem Vindo {nameUser?nameUser:" visitante"}</span>
+        </div>)}
         <div>
             <Input type="text" placeholder='Pesquisar' />
             <Button>{props.pesquisar? props.pesquisar:"Search"}</Button>
