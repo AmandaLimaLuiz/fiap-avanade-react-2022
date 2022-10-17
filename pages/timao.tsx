@@ -23,11 +23,11 @@ async function getFrase(){
 export default function Timao(props: TimaoProps) {
     const [frase, setFrase] = useState<string | undefined>(props.frase)
     const [autor, setAutor] = useState<string | undefined>(props.autor)
-    let contador = 0;
+    const [contador, setContador] = useState<Number>(0);
     useEffect(()=>{    
     getFrase().then((data)=>{console.log(`Executou ${contador} vezes`, data)});   
-    contador++;    
-    },[contador]);
+    setContador(+1); 
+    },[autor,frase]);
 
   return (
     <>
